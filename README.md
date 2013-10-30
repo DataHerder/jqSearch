@@ -1,4 +1,4 @@
-jqSearch.js v1.0
+jqSearch.js v1.1
 ========
 
 ## A simple jQuery plugin - Instant search on keyup ##
@@ -51,6 +51,10 @@ Fully Configured
 	q.config.TIMEOUT_SET = 300; // milliseconds
 	q.config.ONBLUR = false;
 	q.listeners = ['#trigger-1', '#trigger-2'];
+	q.loading_function = function(loading_img, loading_dim, loading_div) {
+		alert('loading img');
+		$(loading_div).html('<img src="'+loading_img+'" width="'+loading_dim[0]+'" height="'+loading_dim[1]+'" />');
+	};
 	$('#search-4').jqSearch('page-to-post-to.php', q, function(response) {
 		$('#results4').html(response);
 	});
