@@ -202,7 +202,7 @@ pre {
 
 		// The configuration variables are also available for customization
 		// set the default div
-		q.config.POP_DIV = '#global-result';
+		q.config.DIV_POP = '#results4';
 		// set the minimum length of the input string before ajax calls are made - default is 3
 		q.config.MIN_LENGTH = 3;
 		// set the wait time before the keyup event creates an ajax request
@@ -214,6 +214,12 @@ pre {
 		// Input Listeners
 		// These allow other inputs to trigger ajax events.
 		q.listeners = ['#trigger-1', '#trigger-2'];
+
+		// create a custom loading image
+		q.loading_function = function(loading_img, loading_dim, loading_div) {
+			alert('loading img');
+			$(loading_div).html('<img src="'+loading_img+'" width="'+loading_dim[0]+'" height="'+loading_dim[1]+'" />');
+		};
 
 		$('#search-4').jqSearch('<?=$post_to?>', q, function(response) {
 			$('#results4').html(response);

@@ -1,7 +1,7 @@
 /**
  * jqSearch.js - A simple jQuery plugin: Instant search on keyup
  *
- * Version 1.1
+ * Version 1.0
  *
  * Copyright (C) 2013  Paul Carlton
  *
@@ -41,7 +41,7 @@
 		} else if ($.type(params) === 'string') {
 			var tmp = params;
 			params = {};
-			params.DIV_POP = tmp;
+			params.elem_pop = tmp;
 		}
 
 		// required parameters
@@ -72,13 +72,6 @@
 			DIV_POP = config.DIV_POP || '#results',
 			ONBLUR = (typeof config.ONBLUR == 'boolean')  ? config.ONBLUR : true || true,
 
-			// loading img
-			loading_img = p.loading_img || '../img/loading_big.gif',
-			loading_dim = p.loading_img_dimensions || [50,50],
-			loading_div = p.loading_img_div || DIV_POP,
-			loading_fnc = p.loading_function || function() {
-				$(loading_div).html('<img src="'+loading_img+'" width="'+loading_dim[0]+'" height="'+loading_dim[1]+'" />');
-			},
 
 			// INTERNAL variables
 			// the last saved value
@@ -101,10 +94,6 @@
 				// assign the name of the input object as the query
 				query = $(this).attr('name');
 			}
-		}
-
-		if (!$.isFunction(loading_fnc)) {
-			throw new Error('Loading Function must be function: '+loading_fnc.constructor.toString()+' given');
 		}
 
 		// listeners with onchange requirements
@@ -159,7 +148,6 @@
 				$.extend(o, query_object);
 				var listeners = _parseListeners();
 				$.extend(o, listeners);
-				loading_fnc(loading_img, loading_dim, loading_div);
 				var xhr = $.post(pg, o, fn);
 				xhrs.push(xhr);
 				timeout = TIMEOUT_SET;
@@ -193,7 +181,6 @@
 				$.extend(o,query_object);
 				var listeners = _parseListeners();
 				$.extend(o, listeners);
-				loading_fnc(loading_img, loading_dim, loading_div);
 				var xhr = $.post(pg, o, fn);
 				xhrs.push(xhr);
 			}
